@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compétences – Swan MESGUEN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0A1628;
+      --navy-mid:    #0F2040;
+      --navy-light:  #1A3050;
+      --slate:       #94A3B8;
+      --slate-light: #CBD5E1;
+      --white:       #F0F4F8;
+      --cyan:        #38BDF8;
+      --border:      rgba(56,189,248,0.15);
+      --border-soft: rgba(148,163,184,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--slate-light);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav__logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav__back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav__back:hover { color: var(--cyan); }
+    .nav__back:hover svg { transform: translateX(-3px); }
+    .nav__back svg { transition: transform 0.2s; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 10vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-header__eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-header__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .page-header__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header__sub {
+      font-size: 1rem;
+      color: var(--slate);
+      max-width: 480px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      padding: 2rem 10vw 5rem;
+    }
+
+    /* ── CATEGORY SECTION ── */
+    .cat-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .cat-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cat-icon svg {
+      width: 16px; height: 16px;
+      stroke: var(--cyan);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cat-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .cat-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+
+    /* ── SKILL ITEMS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .skill-item {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-item:hover {
+      border-color: var(--border);
+      transform: translateY(-2px);
+    }
+
+    .skill-item__name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .skill-item__badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid;
+    }
+
+    .badge--pro {
+      color: var(--cyan);
+      border-color: rgba(56,189,248,0.3);
+      background: rgba(56,189,248,0.06);
+    }
+
+    .badge--mid {
+      color: #7DD3FC;
+      border-color: rgba(125,211,252,0.25);
+      background: rgba(125,211,252,0.05);
+    }
+
+    .badge--jr {
+      color: var(--slate);
+      border-color: var(--border-soft);
+      background: transparent;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border-soft);
+      margin: 3rem 0;
+    }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .legend__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--slate);
+      letter-spacing: 0.06em;
+    }
+
+    .legend__items {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .legend__item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--slate);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1.75rem 10vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--slate);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 1.25rem; }
+      .page-header, main { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .footer { flex-direction: column; gap: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="page-accueil.html" class="nav__logo">swan.mesguen</a>
+    <a href="page-accueil.html" class="nav__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Retour
+    </a>
+  </header>
+
+  <!-- En-tête de page -->
+  <div class="page-header">
+    <p class="page-header__eyebrow">Savoir-faire</p>
+    <h1 class="page-header__title">Compétences informatiques</h1>
+    <p class="page-header__sub">Un aperçu des technologies, outils et environnements que je maîtrise ou explore.</p>
+  </div>
+
+  <main>
+
+    <!-- Légende -->
+    <div class="legend">
+      <span class="legend__label">Niveau :</span>
+      <div class="legend__items">
+        <span class="legend__item">
+          <span class="skill-item__badge badge--pro" style="font-size:10px; padding:2px 8px; border-radius:999px; border:1px solid rgba(56,189,248,0.3); background:rgba(56,189,248,0.06); color:var(--cyan);">maîtrisé</span>
+        </span>
+        <span class="legend__item">
+          <span class="skill-item__badge badge--mid" style="font-size:10px; padding:2px 8px; border-radius:999px; border:1px solid rgba(125,211,252,0.25); background:rgba(125,211,252,0.05); color:#7DD3FC;">intermédiaire</span>
+        </span>
+        <span class="legend__item">
+          <span class="skill-item__badge badge--jr" style="font-size:10px; padding:2px 8px; border-radius:999px; border:1px solid var(--border-soft); color:var(--slate);">débutant</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Langages & Web -->
+    <div class="cat-section">
+      <div class="cat-header">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div>
+          <p class="cat-eyebrow">Langages</p>
+          <h2 class="cat-title">Web & Programmation</h2>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <span class="skill-item__name">HTML / CSS</span>
+          <span class="skill-item__badge badge--pro">maîtrisé</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item__name">C#</span>
+          <span class="skill-item__badge badge--mid">intermédiaire</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item__name">Python</span>
+          <span class="skill-item__badge badge--jr">débutant</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Virtualisation -->
+    <div class="cat-section">
+      <div class="cat-header">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div>
+          <p class="cat-eyebrow">Virtualisation</p>
+          <h2 class="cat-title">Environnements virtuels</h2>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <span class="skill-item__name">Proxmox VE</span>
+          <span class="skill-item__badge badge--pro">maîtrisé</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Simulation réseau -->
+    <div class="cat-section">
+      <div class="cat-header">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M12 11l-5 6M12 11l5 6"/></svg>
+        </div>
+        <div>
+          <p class="cat-eyebrow">Réseau</p>
+          <h2 class="cat-title">Simulation & maquettage</h2>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <span class="skill-item__name">GNS3</span>
+          <span class="skill-item__badge badge--mid">intermédiaire</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item__name">Cisco Packet Tracer</span>
+          <span class="skill-item__badge badge--mid">intermédiaire</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Autres -->
+    <div class="cat-section">
+      <div class="cat-header">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <p class="cat-eyebrow">Outils</p>
+          <h2 class="cat-title">Autres compétences</h2>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <span class="skill-item__name">Git / GitHub</span>
+          <span class="skill-item__badge badge--mid">intermédiaire</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item__name">Canva</span>
+          <span class="skill-item__badge badge--pro">maîtrisé</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__copy">© 2025 Swan MESGUEN</span>
+    <span class="footer__copy">BTS SIO – SISR</span>
+  </footer>
+
+</body>
+</html> 
