@@ -2,6 +2,6 @@
 
 Étudiant en **BTS SIO** (Réseaux / Cybersécurité).
 
-🌐 Portofolio : file:///C:/Users/swanm/Desktop/porfolio/page-accueil.html
+🌐 Portofolio : https://mizzashi.github.io/Portofolio
 📫 Contact : swan.mesguen@gmail.com  
 📍 Guadeloupe
