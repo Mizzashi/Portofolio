@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – Swan MESGUEN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0A1628;
+      --navy-mid:    #0F2040;
+      --navy-light:  #1A3050;
+      --slate:       #94A3B8;
+      --slate-light: #CBD5E1;
+      --white:       #F0F4F8;
+      --cyan:        #38BDF8;
+      --border:      rgba(56,189,248,0.15);
+      --border-soft: rgba(148,163,184,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--slate-light);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav__logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav__back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav__back:hover { color: var(--cyan); }
+    .nav__back:hover svg { transform: translateX(-3px); }
+    .nav__back svg { transition: transform 0.2s; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 10vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-header__eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-header__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .page-header__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header__sub {
+      font-size: 1rem;
+      color: var(--slate);
+      max-width: 480px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      padding: 2rem 10vw 5rem;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+    }
+
+    .form-card__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.75rem;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.5rem;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: var(--navy-light);
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--slate);
+      opacity: 0.6;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--cyan);
+    }
+
+    .field textarea { min-height: 140px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.8rem 1.5rem;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cyan);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: rgba(56,189,248,0.18);
+      border-color: var(--cyan);
+    }
+
+    .btn-submit svg {
+      width: 15px; height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 88px; }
+
+    .contact-info {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-info__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-top: 1px solid var(--border-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-row:hover .contact-row__value { color: var(--cyan); }
+
+    .contact-row__icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(56,189,248,0.07);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-row__icon svg {
+      width: 15px; height: 15px;
+      stroke: var(--cyan);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-row__info { min-width: 0; }
+
+    .contact-row__type {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--slate);
+      letter-spacing: 0.06em;
+    }
+
+    .contact-row__value {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      transition: color 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .availability {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .availability__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ADE80;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .availability__text {
+      font-size: 13px;
+      color: var(--slate-light);
+    }
+
+    .availability__text strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1.75rem 10vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--slate);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; gap: 2rem; }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 1.25rem; }
+      .page-header, main { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .form-card { padding: 1.5rem; }
+      .footer { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="page-accueil.html" class="nav__logo">swan.mesguen</a>
+    <a href="page-accueil.html" class="nav__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Retour
+    </a>
+  </header>
+
+  <!-- En-tête de page -->
+  <div class="page-header">
+    <p class="page-header__eyebrow">Disponible</p>
+    <h1 class="page-header__title">Contact</h1>
+    <p class="page-header__sub">Une question, une opportunité ? Écrivez-moi directement ou via le formulaire.</p>
+  </div>
+
+  <main>
+
+    <!-- Formulaire -->
+    <div class="form-card">
+      <p class="form-card__title">Envoyer un message</p>
+      <form action="https://formspree.io/f/xzdawnkj" method="post">
+
+        <div class="field">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Adresse email</label>
+          <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Envoyer le message
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Sidebar infos -->
+    <aside class="sidebar">
+      <div class="contact-info">
+        <p class="contact-info__label">Coordonnées directes</p>
+
+        <a class="contact-row" href="mailto:swan.mesguen@gmail.com?subject=Contact%20Portfolio">
+          <div class="contact-row__icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contact-row__info">
+            <p class="contact-row__type">Email</p>
+            <p class="contact-row__value">swan.mesguen@gmail.com</p>
+          </div>
+        </a>
+
+        <a class="contact-row" href="tel:+330768421012">
+          <div class="contact-row__icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-row__info">
+            <p class="contact-row__type">Téléphone</p>
+            <p class="contact-row__value">+33 07 68 42 10 12</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="availability">
+        <div class="availability__dot"></div>
+        <p class="availability__text"><strong>Disponible</strong> pour un stage ou une alternance en cybersécurité.</p>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__copy">© 2025 Swan MESGUEN</span>
+    <span class="footer__copy">BTS SIO – SISR</span>
+  </footer>
+
+</body>
+</html>
