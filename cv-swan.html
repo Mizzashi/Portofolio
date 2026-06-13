@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" 
+  integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>CV MESGUEN Swan</title>
+
+  <style>
+    /* =========================
+       RESET CSS de base
+    ========================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a245e;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      min-height: 1000px;
+      margin: 50px;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      box-shadow: 0 35px 55px rgba(0, 0, 0, 0.2);
+    }
+
+    /* =========================
+       PARTIE GAUCHE
+    ========================= */
+    .left-side {
+      position: relative;
+      background: #0a245e;
+      padding: 40px;
+      color: #fff;
+    }
+
+    .profilTexte {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .profilTexte h2 {
+      font-size: 1.5em;
+      text-transform: uppercase;
+      font-weight: 600;
+      line-height: 1.4em;
+    }
+
+    .profilTexte h2 span {
+      font-size: 0.75em;
+      font-weight: 300;
+      text-transform: none;
+    }
+
+    .contactInfo {
+      padding-top: 40px;
+    }
+
+    .title {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+
+    .contactInfo ul {
+      position: relative;
+    }
+
+    .contactInfo ul li {
+      list-style: none;
+      position: relative;
+      margin: 10px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .contactInfo ul li .icon {
+      min-width: 25px;
+      color: #78c6ff;
+      font-size: 18px;
+    }
+
+    .contactInfo ul li .texte,
+    .contactInfo ul li .text {
+      color: #fff;
+      font-weight: 300;
+      font-size: 0.9em;
+    }
+
+    .contactInfo.education li {
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .contactInfo.education h5 {
+      color: #78c6ff;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .contactInfo.education h4 {
+      color: #fff;
+      font-weight: 300;
+      font-size: 0.9em;
+    }
+
+    .contactInfo.language .percent {
+      position: relative;
+      width: 100%;
+      height: 6px;
+      background: #081b45;
+      display: block;
+      margin-top: 5px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .contactInfo.language .percent div {
+      height: 100%;
+      background: #78c6ff;
+    }
+
+    /* =========================
+       PARTIE DROITE
+    ========================= */
+    .right-side {
+      position: relative;
+      background: #fff;
+      padding: 40px;
+    }
+
+    .about {
+      margin-bottom: 45px;
+    }
+
+    .about:last-child {
+      margin-bottom: 0;
+    }
+
+    .title2 {
+      color: #0a245e;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      border-bottom: 2px solid #0a245e;
+      padding-bottom: 5px;
+    }
+
+    .about .box {
+      display: flex;
+      flex-direction: row;
+      margin: 20px 0;
+    }
+
+    .about .box .year_company {
+      min-width: 170px;
+    }
+
+    .about .box .year_company h5 {
+      text-transform: uppercase;
+      color: #555;
+      font-weight: 600;
+      font-size: 0.8em;
+    }
+
+    .about .box .text h4 {
+      text-transform: uppercase;
+      color: #0a245e;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .about .box .text p {
+      color: #333;
+      font-size: 0.95em;
+    }
+
+    /* =========================
+       COMPÉTENCES INFORMATIQUES
+    ========================= */
+    .skills .box {
+      position: relative;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .skills .box h4 {
+      text-transform: uppercase;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.9em;
+    }
+
+    .skills .box .percent {
+      position: relative;
+      width: 100%;
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skills .box .percent div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #0a245e;
+    }
+
+    /* =========================
+       COMPÉTENCES PERSONNELLES
+    ========================= */
+    .personnal ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 20px;
+    }
+
+    .personnal ul li {
+      list-style: none;
+      color: #333;
+      font-size: 0.95em;
+    }
+
+    /* =========================
+       CENTRES D'INTÉRÊTS
+    ========================= */
+    .interest ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .interest ul li {
+      list-style: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .interest ul li .fa {
+      color: #0a245e;
+      font-size: 18px;
+      width: 25px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width: 900px) {
+      .container {
+        margin: 20px;
+        grid-template-columns: 1fr;
+      }
+
+      .about .box {
+        flex-direction: column;
+      }
+
+      .about .box .year_company {
+        margin-bottom: 5px;
+      }
+
+      .skills .box {
+        grid-template-columns: 1fr;
+      }
+
+      .skills .box h4 {
+        margin-bottom: 5px;
+      }
+
+      .personnal ul,
+      .interest ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="left-side">
+      <div class="profilTexte">
+        <h2>Swan MESGUEN<br><span>Étudiante en BTS SIO option SISR</span></h2>
+      </div>
+
+      <div class="contactInfo">
+        <h3 class="title">Mes contacts</h3>
+        <ul>
+          <li>
+            <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span> 
+            <span class="texte">+33 7 68 42 10 12</span> 
+          </li>
+          <li>
+            <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span> 
+            <span class="texte">swan.mesguen@gmail.com</span> 
+          </li>
+          <li>
+            <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span> 
+            <span class="texte">231 Impasse Captant Périnet, Le Gosier, Guadeloupe 97190</span> 
+          </li>
+          <li>
+            <span class="icon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+            <span class="texte">Permis B</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contactInfo education">
+        <h3 class="title">Formations</h3>
+        <ul>
+          <li>
+            <h5>2021 - 2025</h5>
+            <h4>Licence LLCER Japonais L2</h4>
+            <h4>Université INALCO</h4>
+          </li>
+          <li>
+            <h5>2018 - 2021</h5>
+            <h4>Baccalauréat général scientifique</h4>
+            <h4>Lycée Jardin d'Essai</h4>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contactInfo language">
+        <h3 class="title">Langues</h3>
+        <ul>
+          <li>
+            <span class="text">Français</span>
+            <span class="percent">
+              <div style="width: 100%;"></div>
+            </span>
+          </li>
+          <li>
+            <span class="text">Anglais</span>
+            <span class="percent">
+              <div style="width: 75%;"></div>
+            </span>
+          </li>
+          <li>
+            <span class="text">Japonais</span>
+            <span class="percent">
+              <div style="width: 55%;"></div>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="right-side">
+
+      <div class="about">
+        <h2 class="title2">Expériences professionnelles</h2>
+
+        <div class="box">
+          <div class="year_company">
+            <h5>Juillet-Août</h5>
+            <h5>2022 - 2025</h5>
+            <h5>Casino de Roscoff</h5>
+          </div>
+          <div class="text">
+            <h4>Serveuse et barmaid</h4>
+            <p>Gestion de la salle et de la caisse, accueil et service des clients.</p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="year_company">
+            <h5>Juin-Juillet 2023</h5>
+            <h5>Wwoofing</h5>
+          </div>
+          <div class="text">
+            <h4>Bénévolat</h4>
+            <p>Travail dans une ferme biologique située à Aomori, dans le Tôhôku au Japon.</p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="year_company">
+            <h5>Mars 2024</h5>
+            <h5>McDonald's</h5>
+          </div>
+          <div class="text">
+            <h4>Employée polyvalente</h4>
+            <p>Gestion des commandes au comptoir et service à table.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about skills">
+        <h2 class="title2">Compétences informatiques</h2>
+
+        <div class="box">
+          <h4>Python</h4>
+          <div class="percent">
+            <div style="width: 30%;"></div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h4>HTML, CSS & C#</h4>
+          <div class="percent">
+            <div style="width: 55%;"></div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h4>Canva, LibreOffice</h4>
+          <div class="percent">
+            <div style="width: 88%;"></div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h4>Cisco Packet Tracer</h4>
+          <div class="percent">
+            <div style="width: 60%;"></div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h4>Proxmox, GNS3</h4>
+          <div class="percent">
+            <div style="width: 70%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about personnal">
+        <h2 class="title2">Compétences personnelles</h2>
+        <div class="box">
+          <ul>
+            <li>Gestion du temps</li>
+            <li>Organisée</li>
+            <li>Esprit d'équipe</li>
+            <li>Motivée</li>
+            <li>Dynamique</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about interest">
+        <h2 class="title2">Centres d'intérêts</h2>
+        <ul>
+          <li><i class="fa fa-camera" aria-hidden="true"></i>Photographie</li>
+          <li><i class="fa fa-book" aria-hidden="true"></i>Lecture</li>
+          <li><i class="fa fa-code" aria-hidden="true"></i>Informatique</li>
+          <li><i class="fa fa-plane" aria-hidden="true"></i>Voyage</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html> 
