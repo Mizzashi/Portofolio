@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informations – Swan MESGUEN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0A1628;
+      --navy-mid:    #0F2040;
+      --navy-light:  #1A3050;
+      --slate:       #94A3B8;
+      --slate-light: #CBD5E1;
+      --white:       #F0F4F8;
+      --cyan:        #38BDF8;
+      --border:      rgba(56,189,248,0.15);
+      --border-soft: rgba(148,163,184,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--slate-light);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav__logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav__back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav__back:hover { color: var(--cyan); }
+    .nav__back:hover svg { transform: translateX(-3px); }
+    .nav__back svg { transition: transform 0.2s; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 10vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-header__eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-header__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .page-header__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      padding: 2rem 10vw 5rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── CONTENT ── */
+    .content { max-width: 620px; }
+
+    .block { margin-bottom: 3rem; }
+
+    .block__eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .block__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.85rem;
+    }
+
+    .block__text {
+      color: var(--slate-light);
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+
+    .block__text strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border-soft);
+      margin: 2.5rem 0;
+    }
+
+    /* ── INTEREST TAGS ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 999px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--slate-light);
+      background: var(--navy-mid);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tag:hover {
+      border-color: var(--cyan);
+      color: var(--white);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 88px; }
+
+    .profile-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-card__avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+
+    .profile-card__name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .profile-card__sub {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--slate);
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-top: 1px solid var(--border-soft);
+      font-size: 13px;
+    }
+
+    .profile-row__label { color: var(--slate); }
+    .profile-row__value { color: var(--white); font-weight: 500; }
+
+    .sidebar-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.1rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-light);
+      background: var(--navy-mid);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .cta-link:hover {
+      border-color: var(--cyan);
+      color: var(--white);
+      background: var(--navy-light);
+    }
+
+    .cta-link--primary {
+      border-color: rgba(56,189,248,0.4);
+      color: var(--cyan);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1.75rem 10vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--slate);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 1.25rem; }
+      .page-header, main { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .footer { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="page-accueil.html" class="nav__logo">swan.mesguen</a>
+    <a href="page-accueil.html" class="nav__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Retour
+    </a>
+  </header>
+
+  <!-- En-tête de page -->
+  <div class="page-header">
+    <p class="page-header__eyebrow">En savoir plus</p>
+    <h1 class="page-header__title">Informations</h1>
+  </div>
+
+  <!-- Contenu -->
+  <main>
+    <div class="content">
+
+      <div class="block">
+        <p class="block__eyebrow">Identité</p>
+        <h2 class="block__title">Qui suis-je ?</h2>
+        <p class="block__text">
+          Je m'appelle <strong>Swan MESGUEN</strong>, j'ai 22 ans et je suis étudiante en première année de BTS SIO (Services Informatiques aux Organisations), option SISR. J'étudie au lycée de <strong>Baimbridge</strong>, situé aux <strong>Abymes</strong>.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="block">
+        <p class="block__eyebrow">Parcours</p>
+        <h2 class="block__title">Mon parcours</h2>
+        <p class="block__text">
+          Avant d'intégrer le BTS, j'ai suivi une licence LLCER de japonais. Constatant l'impact profond de l'intelligence artificielle sur le métier de la traduction, j'ai choisi de me réorienter afin de préparer une carrière plus durable et tournée vers les infrastructures numériques.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="block">
+        <p class="block__eyebrow">Ambitions</p>
+        <h2 class="block__title">Objectifs professionnels</h2>
+        <p class="block__text">
+          Je souhaite travailler dans la <strong>cybersécurité</strong>, plus particulièrement dans la sécurité des réseaux — protéger les dispositifs, le matériel, les logiciels et les protocoles qui forment l'infrastructure de communication. Mon objectif est de développer mes compétences et de contribuer activement à la sécurité numérique.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="block">
+        <p class="block__eyebrow">Loisirs</p>
+        <h2 class="block__title">Centres d'intérêt</h2>
+        <div class="tags">
+          <span class="tag">Programmation</span>
+          <span class="tag">Développement web</span>
+          <span class="tag">Intelligence artificielle</span>
+          <span class="tag">Cloud & virtualisation</span>
+          <span class="tag">Proxmox</span>
+          <span class="tag">Musique</span>
+          <span class="tag">Lecture</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="profile-card">
+        <div class="profile-card__avatar">SM</div>
+        <p class="profile-card__name">Swan MESGUEN</p>
+        <p class="profile-card__sub">BTS SIO – SISR · 2025–2026</p>
+        <div class="profile-row">
+          <span class="profile-row__label">Âge</span>
+          <span class="profile-row__value">22 ans</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-row__label">Lycée</span>
+          <span class="profile-row__value">Baimbridge</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-row__label">Ville</span>
+          <span class="profile-row__value">Les Abymes</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-row__label">Spécialité</span>
+          <span class="profile-row__value">SISR</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-row__label">Objectif</span>
+          <span class="profile-row__value">Cybersécurité</span>
+        </div>
+      </div>
+
+      <div class="sidebar-cta">
+        <a href="cv_mesguen_swan.html" class="cta-link cta-link--primary">Mon CV →</a>
+        <a href="index.competences.html" class="cta-link">Compétences →</a>
+        <a href="index.contact.html" class="cta-link">Me contacter →</a>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__copy">© 2025 Swan MESGUEN</span>
+    <span class="footer__copy">BTS SIO – SISR</span>
+  </footer>
+
+</body>
+</html>
