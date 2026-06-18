@@ -3,19 +3,460 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact – Swan MESGUEN</title>
-  <link rel="stylesheet" href="styles.stage.css">
+  <title>Stage – Swan MESGUEN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0A1628;
+      --navy-mid:    #0F2040;
+      --navy-light:  #1A3050;
+      --slate:       #94A3B8;
+      --slate-light: #CBD5E1;
+      --white:       #F0F4F8;
+      --cyan:        #38BDF8;
+      --border:      rgba(56,189,248,0.15);
+      --border-soft: rgba(148,163,184,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--slate-light);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav__logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav__back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav__back:hover { color: var(--cyan); }
+    .nav__back:hover svg { transform: translateX(-3px); }
+    .nav__back svg { transition: transform 0.2s; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 10vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-header__eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-header__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .page-header__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header__sub {
+      font-size: 1rem;
+      color: var(--slate);
+      max-width: 560px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      padding: 2rem 10vw 5rem;
+    }
+
+    /* ── INFO GRID (contexte du stage) ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .info-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .info-card:hover {
+      border-color: var(--border);
+      transform: translateY(-2px);
+    }
+
+    .info-card__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .info-card__value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* ── MISSION CARD ── */
+    .mission-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--cyan);
+      opacity: 0.5;
+    }
+
+    .mission-card__type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .mission-card__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 1.25rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      color: var(--slate);
+      background: rgba(148,163,184,0.05);
+    }
+
+    .mission-card__desc {
+      font-size: 0.95rem;
+      color: var(--slate-light);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .mission-card__desc strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .objectives__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .objectives__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 14px;
+      color: var(--slate-light);
+    }
+
+    .objectives__list li::before {
+      content: '';
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.3rem;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid rgba(56,189,248,0.4);
+      color: var(--cyan);
+      background: rgba(56,189,248,0.06);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(56,189,248,0.12);
+      border-color: var(--cyan);
+    }
+
+    .btn svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── PDF SECTION ── */
+    .pdf-section__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pdf-section__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .pdf-frame-wrap {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 0.75rem;
+      overflow: hidden;
+    }
+
+    .pdf-frame-wrap iframe {
+      width: 100%;
+      height: 85vh;
+      border: none;
+      border-radius: 10px;
+      display: block;
+      background: #fff;
+    }
+
+    .pdf-fallback {
+      font-size: 13px;
+      color: var(--slate);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1.75rem 10vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--slate);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 1.25rem; }
+      .page-header, main { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .mission-card { padding: 1.5rem; }
+      .pdf-frame-wrap iframe { height: 70vh; }
+      .footer { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- En-tête -->
-  <header class="header">
-    <div class="header__inner">
-      <h1 class="header__name">Mon Stage</h1>
-      <p class="header__subtitle">Mes missions</p>
-      <a href="index.html" style="display:inline-block; margin-top:10px;">← Retour à l'accueil</a>
-    </div>
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="index.html" class="nav__logo">swan.mesguen</a>
+    <a href="index.html" class="nav__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Retour
+    </a>
   </header>
-  </body>
 
+  <!-- En-tête de page -->
+  <div class="page-header">
+    <p class="page-header__eyebrow">Expérience professionnelle</p>
+    <h1 class="page-header__title">Mon stage</h1>
+    <p class="page-header__sub">Stage réalisé dans le cadre de la première année de BTS SIO, au sein d'une collectivité territoriale en Guadeloupe.</p>
+  </div>
+
+  <main>
+
+    <!-- Contexte du stage -->
+    <div class="info-grid">
+      <div class="info-card">
+        <p class="info-card__label">Structure</p>
+        <p class="info-card__value">Mairie de Baie-Mahault</p>
+      </div>
+      <div class="info-card">
+        <p class="info-card__label">Service</p>
+        <p class="info-card__value">Informatique</p>
+      </div>
+      <div class="info-card">
+        <p class="info-card__label">Période</p>
+        <p class="info-card__value">2025 – 2026</p>
+      </div>
+      <div class="info-card">
+        <p class="info-card__label">Année</p>
+        <p class="info-card__value">BTS SIO 1<sup>re</sup> année</p>
+      </div>
+    </div>
+
+    <!-- Présentation de la mission -->
+    <article class="mission-card">
+      <p class="mission-card__type">Mission 1</p>
+      <h2 class="mission-card__title">Sécurisation du compte local adminpc via Microsoft LAPS</h2>
+
+      <div class="tags">
+        <span class="tag">Windows Server 2022</span>
+        <span class="tag">Active Directory</span>
+        <span class="tag">Microsoft LAPS</span>
+        <span class="tag">GPO</span>
+        <span class="tag">DNS</span>
+        <span class="tag">Sécurité des postes</span>
+      </div>
+
+      <p class="mission-card__desc">
+        Dans le cadre du renforcement de la sécurité des postes de travail, j'ai étudié et déployé
+        <strong>Microsoft LAPS</strong> (Local Administrator Password Solution) dans un environnement
+        Active Directory de test sous <strong>Windows Server 2022</strong>. L'objectif : automatiser la
+        gestion du mot de passe du compte administrateur local <strong>adminpc</strong>, en générant un
+        mot de passe unique, complexe et renouvelé automatiquement pour chaque poste — afin de limiter
+        les risques de déplacement latéral en cas de compromission.
+      </p>
+
+      <ul class="objectives__list">
+        <li>Création et configuration d'un contrôleur de domaine Active Directory (teste.mairie-bm.gp)</li>
+        <li>Installation de Microsoft LAPS et extension du schéma Active Directory</li>
+        <li>Création d'une OU dédiée et attribution des permissions de lecture/écriture</li>
+        <li>Configuration de la GPO LAPS (longueur, complexité, expiration à 30 jours)</li>
+        <li>Vérification du fonctionnement et récupération des mots de passe via PowerShell et LAPS UI</li>
+        <li>Renforcement complémentaire via les groupes restreints (Restricted Groups)</li>
+      </ul>
+
+      <a class="btn" href="projet_rapport_de_stage.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+        Ouvrir le PDF en plein écran
+      </a>
+    </article>
+
+    <!-- PDF intégré -->
+    <section>
+      <div class="pdf-section__header">
+        <p class="pdf-section__title">Rapport de stage complet</p>
+      </div>
+      <div class="pdf-frame-wrap">
+        <iframe src="projet_rapport_de_stage.pdf" title="Rapport de stage – Sécurisation via Microsoft LAPS">
+          <p class="pdf-fallback">
+            Votre navigateur ne peut pas afficher ce PDF.
+            <a href="projet_rapport_de_stage.pdf" target="_blank" rel="noopener">Cliquez ici pour le télécharger</a>.
+          </p>
+        </iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__copy">© 2025 Swan MESGUEN</span>
+    <span class="footer__copy">BTS SIO – SISR</span>
+  </footer>
+
+</body>
 </html>
